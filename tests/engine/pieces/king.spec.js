@@ -61,8 +61,6 @@ describe('King', () => {
         moves.should.deep.include.members(expectedMoves);
     });
 
-    
-
 
     it('cannot make any other moves', () => {
         const king = new King(Player.WHITE);
