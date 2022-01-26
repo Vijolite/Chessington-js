@@ -25,6 +25,32 @@ describe('Rook', () => {
         moves.should.deep.include.members(expectedMoves);
     });
 
+    it('can move until meet another piece', () => {
+        const rook = new Rook(Player.WHITE);
+        board.setPiece(Square.at(1, 2), rook);
+
+        const rook2 = new Rook(Player.WHITE);
+        board.setPiece(Square.at(5, 2), rook2);
+        const rook3 = new Rook(Player.WHITE);
+        board.setPiece(Square.at(1, 6), rook3);
+
+        const moves = rook.getAvailableMoves(board);
+
+        const expectedMoves = [
+            // Horizontal
+            Square.at(1, 0), Square.at(1, 1), Square.at(1, 3), Square.at(1, 4), Square.at(1, 5),
+            // Vertical
+            Square.at(0, 2), Square.at(2, 2), Square.at(3, 2), Square.at(4, 2)
+        ];
+
+        moves.should.deep.include.members(expectedMoves);
+        //moves.should.deep.have.members(expectedMoves);
+        moves.should.have.length(9);
+
+    });
+
+    
+
     it('cannot make any other moves', () => {
         const rook = new Rook(Player.WHITE);
         board.setPiece(Square.at(1, 2), rook);

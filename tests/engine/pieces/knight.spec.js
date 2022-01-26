@@ -24,6 +24,21 @@ describe('Knight', () => {
         moves.should.deep.include.members(expectedMoves);
     });
 
+    it('can handle corners correctly', () => {
+        const knight = new Knight(Player.WHITE);
+        board.setPiece(Square.at(0,7), knight);
+
+        const moves = knight.getAvailableMoves(board);
+
+        const expectedMoves = [
+            Square.at(1, 5),
+            Square.at(2, 6)
+        ]
+
+        moves.should.deep.include.members(expectedMoves);
+    });
+
+
     it('cannot make any other moves', () => {
         const knight = new Knight(Player.WHITE);
         board.setPiece(Square.at(2, 5), knight);

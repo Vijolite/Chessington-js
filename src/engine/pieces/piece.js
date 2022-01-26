@@ -11,4 +11,20 @@ export default class Piece {
         const currentSquare = board.findPiece(this);
         board.movePiece(currentSquare, newSquare);
     }
+
+
+    // static same_colour(board,sq) {
+    //     return (board.getPiece(Square.at(r1, c1)).player===board.getPiece(Square.at(r2, c2)).player);
+    // }
+
+    same_colour(board,sq) {
+        return (this.player === board.getPiece(sq).player);
+    }
+
+    // trimAvailableMoves(this, board){
+    //     let availableMoves = this.getAvailableMoves(board)
+    //     .filter(square => this.player !== board.getPiece(square).player);
+    //     return availableMoves
+    // }
+    
 }

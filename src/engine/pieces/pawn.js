@@ -31,16 +31,34 @@ export default class Pawn extends Piece {
             if (board.getPiece(Square.at(location.row + 1, location.col))===undefined)
                 availableMoves.push( Square.at(location.row + 1, location.col));
             //if there is an opponent's piece diagonally
+            if (Square.is_valid( location.row+1,location.col-1)) { //diagonally left
+                if (board.getPiece(Square.at(location.row+1,location.col-1))!==undefined)
+                    if (board.getPiece(Square.at(location.row+1,location.col-1)).player===Player.BLACK)
+                        availableMoves.push( Square.at(location.row+1,location.col-1));
+            }
+            if (Square.is_valid( location.row+1,location.col+1)) { //diagonally right
+                if (board.getPiece(Square.at(location.row+1,location.col+1))!==undefined)
+                    if (board.getPiece(Square.at(location.row+1,location.col+1)).player===Player.BLACK)
+                        availableMoves.push( Square.at(location.row+1,location.col+1));
+            }
         } else {
             if (location.row===6 && board.getPiece(Square.at(location.row - 2, location.col))===undefined)
                 availableMoves.push(Square.at(location.row - 2, location.col));
             if (board.getPiece(Square.at(location.row - 1, location.col))===undefined)
                 availableMoves.push( Square.at(location.row - 1, location.col));
+            //if there is an opponent's piece diagonally
+            if (Square.is_valid( location.row-1,location.col-1)) { //diagonally left
+                if (board.getPiece(Square.at(location.row-1,location.col-1))!==undefined)
+                    if (board.getPiece(Square.at(location.row-1,location.col-1)).player===Player.WHITE)
+                        availableMoves.push( Square.at(location.row-1,location.col-1));
+            }
+            if (Square.is_valid( location.row-1,location.col+1)) { //diagonally right
+                if (board.getPiece(Square.at(location.row-1,location.col+1))!==undefined)
+                    if (board.getPiece(Square.at(location.row-1,location.col+1)).player===Player.WHITE)
+                        availableMoves.push( Square.at(location.row-1,location.col+1));
+            }
         }
-        //console.log(board);
-        //const queen = new Pawn(Player.WHITE);
-        //board.setPiece(Square.at(2, 5), 'Pawn');
-        //console.log(board.getPiece(Square.at(2, 5)));
+
         return availableMoves;
     }
 

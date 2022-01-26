@@ -32,6 +32,50 @@ describe('Pawn', () => {
             moves.should.deep.include.members([Square.at(2, 7), Square.at(3, 7)]);
         });
 
+        it('cannot move forward if something is in front of it', () => {
+            const pawn = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(2, 5), pawn);
+
+            const pawn2 = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(3, 5), pawn2);
+
+            const moves = pawn.getAvailableMoves(board);            
+            moves.should.have.length(0);
+        });
+
+        it('should be able to capture diagonally opponent\'s piece', () => {
+            const pawn = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(2, 5), pawn);
+
+            const pawn2 = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(3, 4), pawn2);
+            const pawn3 = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(3, 6), pawn3);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            const expectedMoves = [Square.at(3, 4), Square.at(3, 6),  Square.at(3, 5)];
+
+            moves.should.deep.include.members(expectedMoves);
+
+        });
+
+        it('should not capture diagonally its own piece', () => {
+            const pawn = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(2, 5), pawn);
+
+            const pawn2 = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(3, 4), pawn2);
+            const pawn3 = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(3, 6), pawn3);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            const expectedMoves = [Square.at(3, 5)];
+
+            moves.should.deep.include.members(expectedMoves);
+        });
+
     });
 
     describe('black pawns', () => {
@@ -58,6 +102,50 @@ describe('Pawn', () => {
 
             moves.should.have.length(2);
             moves.should.deep.include.members([Square.at(4, 7), Square.at(5, 7)]);
+        });
+
+        it('cannot move forward if something is in front of it', () => {
+            const pawn = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(2, 5), pawn);
+
+            const pawn2 = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(1, 5), pawn2);
+
+            const moves = pawn.getAvailableMoves(board);            
+            moves.should.have.length(0);
+        });
+
+        it('should be able to capture diagonally opponent\'s piece', () => {
+            const pawn = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(2, 5), pawn);
+
+            const pawn2 = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(1, 4), pawn2);
+            const pawn3 = new Pawn(Player.WHITE);
+            board.setPiece(Square.at(1, 6), pawn3);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            const expectedMoves = [Square.at(1, 4), Square.at(1, 6),  Square.at(1, 5)];
+
+            moves.should.deep.include.members(expectedMoves);
+
+        });
+
+        it('should not capture diagonally its own piece', () => {
+            const pawn = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(2, 5), pawn);
+
+            const pawn2 = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(1, 4), pawn2);
+            const pawn3 = new Pawn(Player.BLACK);
+            board.setPiece(Square.at(1, 6), pawn3);
+
+            const moves = pawn.getAvailableMoves(board);
+
+            const expectedMoves = [Square.at(1, 5)];
+
+            moves.should.deep.include.members(expectedMoves);
         });
 
     });
