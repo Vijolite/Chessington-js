@@ -37,7 +37,10 @@ export default class Pawn extends Piece {
             if (board.getPiece(Square.at(location.row - 1, location.col))===undefined)
                 availableMoves.push( Square.at(location.row - 1, location.col));
         }
-        console.log(board);
+        //console.log(board);
+        //const queen = new Pawn(Player.WHITE);
+        //board.setPiece(Square.at(2, 5), 'Pawn');
+        //console.log(board.getPiece(Square.at(2, 5)));
         return availableMoves;
     }
 
