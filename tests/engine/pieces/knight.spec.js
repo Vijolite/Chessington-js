@@ -38,6 +38,27 @@ describe('Knight', () => {
         moves.should.deep.include.members(expectedMoves);
     });
 
+    it('cannot capture the same colour piece', () => {
+        const knight = new Knight(Player.WHITE);
+        board.setPiece(Square.at(2, 5), knight);
+
+        const knight2 = new Knight(Player.WHITE);
+        board.setPiece(Square.at(1, 3), knight2);
+        const knight3 = new Knight(Player.WHITE);
+        board.setPiece(Square.at(1, 7), knight3);
+
+        const moves = knight.getAvailableMoves(board);
+
+        const expectedMoves = [
+            
+            Square.at(0, 4), Square.at(0, 6), Square.at(4, 4), Square.at(3, 3), Square.at(4, 6),Square.at(3, 7)
+           
+        ];
+
+        moves.should.deep.include.members(expectedMoves);
+        moves.should.have.length(6);
+    });
+
 
     it('cannot make any other moves', () => {
         const knight = new Knight(Player.WHITE);
