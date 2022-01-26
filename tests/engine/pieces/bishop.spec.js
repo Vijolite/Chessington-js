@@ -1,15 +1,7 @@
-// import Bishop from '../../../src/engine/pieces/bishop';
-
-// describe('Bishop', () => {
-
-// });
-
 import 'chai/register-should';
-// import Rook from '../../../src/engine/pieces/rook';
 import Board from '../../../src/engine/board';
 import Player from '../../../src/engine/player';
 import Square from '../../../src/engine/square';
-// import King from '../../../src/engine/pieces/king';
 import Bishop from '../../../src/engine/pieces/bishop';
 
 describe('Bishop', () => {
@@ -32,6 +24,19 @@ describe('Bishop', () => {
         moves.should.deep.include.members(expectedMoves);
     });
 
+    it('top left corner', () => {
+        const bishop = new Bishop(Player.WHITE);
+        board.setPiece(Square.at(7, 0), bishop);
+
+        const moves = bishop.getAvailableMoves(board);
+
+        const expectedMoves = [
+            
+            Square.at(6, 1), Square.at(5, 2), Square.at(4, 3), Square.at(3, 4), Square.at(2, 5), Square.at(1, 6), Square.at(0, 7)
+        ];
+
+        moves.should.deep.include.members(expectedMoves);
+    });
    
 
     it('cannot make any other moves', () => {
